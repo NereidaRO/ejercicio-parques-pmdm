@@ -1,0 +1,52 @@
+{
+  "parks": [
+    {
+      "name": "Parc de Capçalera. València.",
+      "desc": "Zona verde en el antiguo cauce del Túria, con senderos para caminar o ir en bicicleta.",
+      "phone": "963257881",
+      "website": "https://jardins.valencia.es/va/jardin/parc-de-capcalera",
+      "closingTime": "24h",
+      "openingTime": "24h",
+      "sports": true,
+      "children": true,
+      "bar": true,
+      "pets": true
+    },
+    {
+      "name": "Parque del Retiro. Madrid",
+      "desc": "Jardín histórico y parque público.",
+      "phone": "914 00 87 40",
+      "website": "https://www.esmadrid.com/informacion-turistica/parque-del-retiro",
+      "closingTime": "21:00",
+      "openingTime": "18:00",
+      "sports": true,
+      "children": false,
+      "bar": true,
+      "pets": true
+    },
+    {
+      "name": "Parc Güell. Barcelona",
+      "desc": "Parque público con jardines y elementos arquitectónicos.",
+      "phone": "934 09 18 31",
+      "website": "https://parkguell.barcelona",
+      "closingTime": "19:30",
+      "openingTime": "9:30",
+      "sports": false,
+      "children": false,
+      "bar": false,
+      "pets": false
+    },
+    {
+      "name": "Parque de Maria Luisa. Sevilla.",
+      "desc": "Parque junto a la Plaza de España, con gran cantidad de plantas, aves y zonas de juego.",
+      "phone": "955 47 32 32",
+      "website": "https://www.sevilla.org/servicios/medio-ambiente-parques-jardines/parques/parques-y-jardines-historicos/parque-de-maria-luisa",
+      "closingTime": "22:00",
+      "openingTime": "8:00",
+      "sports": true,
+      "children": true,
+      "bar": true,
+      "pets": true
+    }
+  ]
+}

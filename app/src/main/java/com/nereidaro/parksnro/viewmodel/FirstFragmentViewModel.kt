@@ -11,7 +11,10 @@ import com.nereidaro.parksnro.repository.ParkRepository
 // para poder acceder al contexto
 class FirstFragmentViewModel(application: Application) :
     AndroidViewModel(application) {
-
+    //Coger la lista inicial del repositorio
+    init {
+        ParkRepository.getInstance(getApplication<Application>().applicationContext)
+    }
     // Definición de atributos
 
     // Definimos los atributos LiveData para gestionar los clics,

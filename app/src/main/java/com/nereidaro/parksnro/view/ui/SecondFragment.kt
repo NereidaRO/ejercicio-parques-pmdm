@@ -1,17 +1,19 @@
-package com.nereidaro.parksnro
+package com.nereidaro.parksnro.view.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.Fragment
+import com.nereidaro.parksnro.R
 import com.nereidaro.parksnro.databinding.FragmentSecondBinding
+import com.nereidaro.parksnro.model.Park
+import com.nereidaro.parksnro.view.dialog.MiDialogFragment
 
 /**
- * A simple [Fragment] subclass as the second destination in the navigation.
+ * A simple [androidx.fragment.app.Fragment] subclass as the second destination in the navigation.
  */
 class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
 

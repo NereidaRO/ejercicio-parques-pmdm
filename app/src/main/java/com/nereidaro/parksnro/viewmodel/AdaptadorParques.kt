@@ -1,14 +1,19 @@
-package com.nereidaro.parksnro
+package com.nereidaro.parksnro.viewmodel
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.nereidaro.parksnro.R
+import com.nereidaro.parksnro.model.Park
+import com.nereidaro.parksnro.model.Parks
 
 class AdaptadorParques(
-    val eventListenerClick: (Park, View)-> Unit,
-    val eventListenerLongClick: (Park, View) -> Boolean
-):RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val eventListenerClick: (Park, View) -> Unit,
+    val eventListenerLongClick: (Park, View) -> Boolean,
+    applicationContext: Context
+): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(
         //crear elementos
         parent: ViewGroup,

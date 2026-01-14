@@ -1,7 +1,10 @@
-package com.nereidaro.parksnro
-import androidx.recyclerview.widget.RecyclerView
+package com.nereidaro.parksnro.viewmodel
+
 import android.view.View
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.nereidaro.parksnro.R
+import com.nereidaro.parksnro.model.Park
 
 //esta clase se encarga de gestionar que cada vez que el recycled funcione las cosas estén en orden
 class parkViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){

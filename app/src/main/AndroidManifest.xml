@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ParksNRO">
         <activity
-            android:name=".MainActivity"
+            android:name=".view.ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ParksNRO">
             <intent-filter>

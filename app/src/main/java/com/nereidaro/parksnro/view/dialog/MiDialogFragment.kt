@@ -1,5 +1,6 @@
-package com.nereidaro.parksnro
+package com.nereidaro.parksnro.view.dialog
 
+import android.R
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
@@ -26,11 +27,11 @@ class MiDialogFragment(
 
             builder.setTitle(title)
                 .setMessage(content)
-                .setPositiveButton(android.R.string.ok) { _, _ ->
+                .setPositiveButton(R.string.ok) { _, _ ->
                     val listener = frag as OnOKOrCancelListener?
                     listener!!.onPositiveClick()
                 }
-                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                .setNegativeButton(R.string.cancel) { _, _ ->
                     val listener = frag as OnOKOrCancelListener?
                     listener!!.onCancelClick()
                 }
@@ -58,4 +59,3 @@ del fragmento listener. Cuando pulsa Cancelar, se llama al metodo onCancelClick(
 De esta forma, el dialogo queda desacoplado de la logica, delegando las acciones
 en el fragmento que lo invoca.
 */
-

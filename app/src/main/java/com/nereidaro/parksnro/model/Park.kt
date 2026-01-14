@@ -1,4 +1,4 @@
-package com.nereidaro.parksnro
+package com.nereidaro.parksnro.model
 
 import java.io.Serializable
 

@@ -1,4 +1,4 @@
-package com.nereidaro.parksnro
+package com.nereidaro.parksnro.model
 
 import android.content.Context
 import android.util.Log
@@ -39,7 +39,7 @@ object Parks {
             var park = jsa[i] as JSONObject
 
             try {
-                com.nereidaro.parksnro.Parks.parks.add(
+                parks.add(
                     Park(
                         park["name"] as String,
                         park["desc"] as String,
@@ -62,19 +62,19 @@ object Parks {
 
     // Metodo para añadir un parque
     fun add(park: Park) {
-        com.nereidaro.parksnro.Parks.parks.add(park);
+        parks.add(park);
     }
 
     // Metodo para reemplazar un parque por otro
     fun replace(originalPark: Park, newPark: Park) {
-        val index = com.nereidaro.parksnro.Parks.parks.indexOf(originalPark)
-        com.nereidaro.parksnro.Parks.parks[index] = newPark
+        val index = parks.indexOf(originalPark)
+        parks[index] = newPark
     }
 
     // Metodo para eliminar un parque
     fun remove(originalPark: Park): Int {
-        val index = com.nereidaro.parksnro.Parks.parks.indexOf(originalPark)
-        com.nereidaro.parksnro.Parks.parks.remove(originalPark)
+        val index = parks.indexOf(originalPark)
+        parks.remove(originalPark)
         return index // Retorna el índice del parque eliminado
     }
 }

@@ -98,4 +98,19 @@ class FirstFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
             Toast.LENGTH_SHORT
         ).show()
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        firstFragmentViewModel.parkList.observe(viewLifecycleOwner) { parks ->
+            parks.let {
+                if (firstFragmentViewModel.deletedPos.value == null) {
+                    firstFragmentViewModel.adaptador.value?.notifyDataSetChanged()
+                } else {
+                    firstFragmentViewModel.adaptador.value
+                        ?.notifyItemRemoved(firstFragmentViewModel.deletedPos.value!!)
+                    firstFragmentViewModel.deletedPos.value = null
+                }
+            }
+        }
+    }
 }

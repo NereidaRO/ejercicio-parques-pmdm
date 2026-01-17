@@ -7,16 +7,19 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.nereidaro.parksnro.R
 import com.nereidaro.parksnro.databinding.FragmentSecondBinding
 import com.nereidaro.parksnro.db.Park
 import com.nereidaro.parksnro.view.dialog.MiDialogFragment
+import com.nereidaro.parksnro.viewmodel.FirstFragmentViewModel
 
 /**
  * A simple [androidx.fragment.app.Fragment] subclass as the second destination in the navigation.
  */
 class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
-
+    private lateinit var firstFragmentViewModel: FirstFragmentViewModel
     private var _binding: FragmentSecondBinding? = null
 
     // This property is only valid between onCreateView and
@@ -69,6 +72,30 @@ class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        firstFragmentViewModel = ViewModelProvider(requireActivity())[FirstFragmentViewModel::class.java]
+        firstFragmentViewModel.parkSaved.observe(viewLifecycleOwner) { saved ->
+            saved?.let {
+                firstFragmentViewModel.parkSaved.value = null
+
+                Snackbar.make(
+                    binding.root,
+                    resources.getString(R.string.dataSaved),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
+
+        firstFragmentViewModel.parkUpdated.observe(viewLifecycleOwner) { updated ->
+            updated?.let {
+                firstFragmentViewModel.parkUpdated.value = null
+
+                Snackbar.make(
+                    binding.root,
+                    resources.getString(R.string.updatedSaved),
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -114,4 +141,5 @@ class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
             Toast.LENGTH_SHORT
         ).show()
     }
+
 }

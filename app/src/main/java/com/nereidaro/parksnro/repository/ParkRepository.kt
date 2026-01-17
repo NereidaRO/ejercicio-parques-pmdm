@@ -1,26 +1,48 @@
 package com.nereidaro.parksnro.repository
-
 import android.content.Context
-import com.nereidaro.parksnro.R
+import androidx.lifecycle.LiveData
+import com.nereidaro.parksnro.db.DatabaseBuilder
 import com.nereidaro.parksnro.db.Park
-import com.nereidaro.parksnro.model.Parks
 
-class ParkRepository private constructor(private var context: Context) {
-    init{
-        Parks.populate(context, R.raw.parks)}
-    //Implementación del patrón Singleton
-    companion object{
+class ParkRepository private constructor(
+    private var context: Context
+) {
+
+    companion object {
         private var INSTANCE: ParkRepository? = null
-        fun getInstance(context: Context): ParkRepository{
-            if(INSTANCE == null){
+
+        fun getInstance(context: Context): ParkRepository {
+            if (INSTANCE == null) {
                 INSTANCE = ParkRepository(context)
             }
             return INSTANCE!!
         }
     }
 
-    //Métodos de la API del Repositorio
-    fun getParks() = Parks.parks;
-    fun getNumParks() = Parks.parks.size;
-    fun removePark (p: Park) = Parks.remove(p);
+    // Métodos que ofrece la API del repositorio
+
+    fun getParks(): LiveData<List<Park>> {
+        return DatabaseBuilder
+            .getInstance(context)
+            .parkDao()
+            .getAll()
+    }
+
+    suspend fun removePark(park: Park): Int =
+        DatabaseBuilder
+            .getInstance(context)
+            .parkDao()
+            .deletePark(park)
+
+    suspend fun updatePark(park: Park) =
+        DatabaseBuilder
+            .getInstance(context)
+            .parkDao()
+            .updatePark(park)
+
+    suspend fun addPark(park: Park) =
+        DatabaseBuilder
+            .getInstance(context)
+            .parkDao()
+            .addPark(park)
 }

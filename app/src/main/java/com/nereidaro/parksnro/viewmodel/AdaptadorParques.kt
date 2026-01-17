@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nereidaro.parksnro.R
-import com.nereidaro.parksnro.model.Park
+import com.nereidaro.parksnro.db.Park
 import com.nereidaro.parksnro.model.Parks
 
 class AdaptadorParques(

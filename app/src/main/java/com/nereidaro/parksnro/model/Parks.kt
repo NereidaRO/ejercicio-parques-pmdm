@@ -2,6 +2,7 @@ package com.nereidaro.parksnro.model
 
 import android.content.Context
 import android.util.Log
+import com.nereidaro.parksnro.db.Park
 import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONTokener

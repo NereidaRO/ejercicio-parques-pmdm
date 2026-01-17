@@ -4,7 +4,7 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.nereidaro.parksnro.model.Park
+import com.nereidaro.parksnro.db.Park
 import com.nereidaro.parksnro.repository.ParkRepository
 
 // Definimos el ViewModel como AndroidViewModel,

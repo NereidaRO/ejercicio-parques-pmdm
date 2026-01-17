@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.nereidaro.parksnro.R
 import com.nereidaro.parksnro.databinding.FragmentSecondBinding
-import com.nereidaro.parksnro.model.Park
+import com.nereidaro.parksnro.db.Park
 import com.nereidaro.parksnro.view.dialog.MiDialogFragment
 
 /**

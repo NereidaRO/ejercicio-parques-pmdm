@@ -2,7 +2,7 @@ package com.nereidaro.parksnro.repository
 
 import android.content.Context
 import com.nereidaro.parksnro.R
-import com.nereidaro.parksnro.model.Park
+import com.nereidaro.parksnro.db.Park
 import com.nereidaro.parksnro.model.Parks
 
 class ParkRepository private constructor(private var context: Context) {

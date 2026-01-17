@@ -12,7 +12,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.nereidaro.parksnro.R
 import com.nereidaro.parksnro.databinding.FragmentFirstBinding
-import com.nereidaro.parksnro.model.Park
+import com.nereidaro.parksnro.db.Park
 import com.nereidaro.parksnro.view.dialog.MiDialogFragment
 import com.nereidaro.parksnro.viewmodel.FirstFragmentViewModel
 //Vista en firstFragment y lógica en FirstFragmentViewModel -> MVVM

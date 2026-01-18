@@ -1,11 +1,13 @@
 package com.nereidaro.parksnro.view.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -14,6 +16,11 @@ import com.nereidaro.parksnro.databinding.FragmentSecondBinding
 import com.nereidaro.parksnro.db.Park
 import com.nereidaro.parksnro.view.dialog.MiDialogFragment
 import com.nereidaro.parksnro.viewmodel.FirstFragmentViewModel
+import android.Manifest
+import android.net.Uri
+import android.os.Environment
+import androidx.core.content.FileProvider
+import java.io.File
 
 /**
  * A simple [androidx.fragment.app.Fragment] subclass as the second destination in the navigation.
@@ -22,8 +29,44 @@ class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
     private lateinit var firstFragmentViewModel: FirstFragmentViewModel
     private var _binding: FragmentSecondBinding? = null
 
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    //Permisos de la cámara
+    private val cameraPermissionRequest =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+
+            if (
+                permissions.getOrDefault(
+                    android.Manifest.permission.CAMERA,
+                    false
+                ) &&
+                permissions.getOrDefault(
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    false
+                )
+            ) {
+                // Si tenemos permisos, invocamos el método takePhoto()
+                takePhoto()
+            } else {
+                // Si no, mostramos una advertencia
+                Log.w("Permisos de cámara", "Sin permisos")
+            }
+        }
+
+    //Guardar URI de la foto en URI y en texto plano
+    private var latestTmpUri: Uri? = null
+    private var tmpUri = ""
+    private val cargadorCamara =
+        registerForActivityResult(
+            ActivityResultContracts.TakePicture()
+        ) { result: Boolean ->
+
+            if (result) {
+                binding.iwHero.setImageURI(latestTmpUri)
+                tmpUri = latestTmpUri.toString()
+                firstFragmentViewModel.currentPark.value?.img = tmpUri
+            }
+        }
     private val binding get() = _binding!!
     val park: Park? = arguments?.getSerializable("park") as Park?
     override fun onCreateView(
@@ -96,6 +139,18 @@ class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
                 ).show()
             }
         }
+
+        binding.iwHero.setOnClickListener {
+
+            // Cuando se hace clic sobre la imagen, lanzamos el
+            // cargador para comprobar los permisos de la cámara
+            cameraPermissionRequest.launch(
+                arrayOf(
+                    android.Manifest.permission.CAMERA,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            )
+        }
     }
 
     override fun onDestroyView() {
@@ -141,5 +196,24 @@ class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
             Toast.LENGTH_SHORT
         ).show()
     }
+    private fun takePhoto(){
+        // Obtenemos la carpeta de almacenamiento externo de la aplicación, mediante el método getExternalFilesDir de la actividad
+        val dir = requireActivity()
+            .getExternalFilesDir(Environment.DIRECTORY_PICTURES)
 
+        // Generamos el fichero temporal
+        val file = File.createTempFile("parques", ".jpg", dir)
+
+        // Obtenemos su URI, almacenándola en la variable latestTmpUri, definida como variable miembro de la clase
+        latestTmpUri =
+            FileProvider.getUriForFile(
+                requireActivity(),
+                requireActivity().applicationContext.packageName +
+                        ".provider",
+                file
+            )
+
+        // Y proporcionamos esta ruta al cargador de la cámara, para que guarde la imagen capturada en la URI especificada.
+        cargadorCamara.launch(latestTmpUri)
+    }
 }

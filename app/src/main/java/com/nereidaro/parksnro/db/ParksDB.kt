@@ -19,6 +19,6 @@ abstract class ParksDB : RoomDatabase() {
 }
 val MIGRATION_1_2 = object : Migration(1, 2){
     override fun migrate(database: SupportSQLiteDatabase){
-        database.execSQL("ALTER TABLE Park ADD COLUMN img TEXT")
+        database.execSQL("ALTER TABLE Park ADD COLUMN tmpUri TEXT")
     }
 }

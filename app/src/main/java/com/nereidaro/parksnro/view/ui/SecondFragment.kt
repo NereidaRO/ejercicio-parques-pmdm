@@ -64,7 +64,7 @@ class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
             if (result) {
                 binding.iwHero.setImageURI(latestTmpUri)
                 tmpUri = latestTmpUri.toString()
-                firstFragmentViewModel.currentPark.value?.img = tmpUri
+                firstFragmentViewModel.currentPark.value?.tmpUri = tmpUri
             }
         }
     private val binding get() = _binding!!
@@ -119,7 +119,11 @@ class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
         firstFragmentViewModel.parkSaved.observe(viewLifecycleOwner) { saved ->
             saved?.let {
                 firstFragmentViewModel.parkSaved.value = null
-
+                // ImageView
+                if (park?.tmpUri != "")
+                    binding.iwHero.setImageURI(Uri.parse(park?.tmpUri))
+                else
+                    binding.iwHero.setImageResource(R.drawable.pexels_hero)
                 Snackbar.make(
                     binding.root,
                     resources.getString(R.string.dataSaved),
@@ -131,7 +135,11 @@ class SecondFragment : Fragment(), MiDialogFragment.OnOKOrCancelListener {
         firstFragmentViewModel.parkUpdated.observe(viewLifecycleOwner) { updated ->
             updated?.let {
                 firstFragmentViewModel.parkUpdated.value = null
-
+                // ImageView
+                if (park?.tmpUri != "")
+                    binding.iwHero.setImageURI(Uri.parse(park?.tmpUri))
+                else
+                    binding.iwHero.setImageResource(R.drawable.pexels_hero)
                 Snackbar.make(
                     binding.root,
                     resources.getString(R.string.updatedSaved),

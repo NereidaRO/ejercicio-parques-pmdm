@@ -19,5 +19,5 @@ data class Park(
     var children: Boolean?,
     var bar: Boolean?,
     var pets: Boolean?,
-    var img:String? = ""
+    var tmpUri:String? = ""
 ): Serializable

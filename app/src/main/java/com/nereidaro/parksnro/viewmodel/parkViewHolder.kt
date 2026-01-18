@@ -1,6 +1,8 @@
 package com.nereidaro.parksnro.viewmodel
 
+import android.net.Uri
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nereidaro.parksnro.R
@@ -10,12 +12,14 @@ import com.nereidaro.parksnro.db.Park
 class parkViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
     val name = itemView.findViewById(R.id.tvParkName) as TextView
     val desc = itemView.findViewById(R.id.tvParkDesc) as TextView
+    val img = itemView.findViewById(R.id.iwHero) as ImageView
 
     fun bind(parque: Park,
              eventListenerClick: (Park, View)-> Unit,
              eventListenerLongClick: (Park, View) -> Boolean){
         name.text = parque.name
         desc.text = parque.desc
+        if(parque.tmpUri!=""){img.setImageURI(Uri.parse(parque.tmpUri))}
 
         itemView.setOnClickListener { eventListenerClick(parque, itemView) }
         itemView.setOnLongClickListener { eventListenerLongClick(parque, itemView) }
